@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Ursos Sem Curso</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div id="quiz-container">
+        <h1>Quiz Ursos Sem Curso</h1>
+        <div id="question-container">
+            <p id="question"></p>
+            <button class="answer-btn">Opção 1</button>
+            <button class="answer-btn">Opção 2</button>
+            <button class="answer-btn">Opção 3</button>
+        </div>
+        <p id="feedback"></p>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Qual o nome do urso pardo protagonista?",
+                answers: [
+                    { text: "Pardo", correct: true },
+                    { text: "Polar", correct: false },
+                    { text: "Panda", correct: false }
+                ]
+            },
+            {
+                question: "Qual o nome do urso polar?",
+                answers: [
+                    { text: "Pardo", correct: false },
+                    { text: "Polar", correct: true },
+                    { text: "Panda", correct: false }
+                ]
+            },
+            {
+                question: "O que os ursos costumam fazer na série?",
+                answers: [
+                    { text: "Estudar", correct: false },
+                    { text: "Trabalhar", correct: false },
+                    { text: "Se aventurar", correct: true }
+                ]
+            },
+            {
+                question: "Qual é a espécie do urso panda?",
+                answers: [
+                    { text: "Pardo", correct: false },
+                    { text: "Polar", correct: false },
+                    { text: "Panda-gigante", correct: true }
+                ]
+            },
+            {
+                question: "O que Ice Bear costuma dizer na terceira pessoa?",
+                answers: [
+                    { text: "Ele está com fome", correct: false },
+                    { text: "Ele gosta de sorvete", correct: true },
+                    { text: "Ele quer dormir", correct: false }
+                ]
+            },
+            {
+                question: "Qual o sonho de Grizzly?",
+                answers: [
+                    { text: "Construir uma casa", correct: false },
+                    { text: "Comer muitos doces", correct: true },
+                    { text: "Nadar no oceano", correct: false }
+                ]
+            },
+            {
+                question: "Como os ursos se conhecem?",
+                answers: [
+                    { text: "Na escola", correct: false },
+                    { text: "Na floresta", correct: false },
+                    { text: "No zoológico", correct: true }
+                ]
+            },
+            {
+                question: "Qual o nome da líder do grupo de jovens ursos?",
+                answers: [
+                    { text: "Grizzette", correct: false },
+                    { text: "Pandette", correct: false },
+                    { text: "Chloe", correct: true }
+                ]
+            }
+        ];
+
+        const questionContainer = document.getElementById("question-container");
+        const questionElement = document.getElementById("question");
+        const answerButtons = document.getElementsByClassName("answer-btn");
+        const feedbackElement = document.getElementById("feedback");
+
+        let currentQuestionIndex = 0;
+
+        function showQuestion(question) {
+            questionElement.innerText = question.question;
+            question.answers.forEach((answer, index) => {
+                answerButtons[index].innerText = answer.text;
+                answerButtons[index].addEventListener("click", () => selectAnswer(answer));
+            });
+        }
+
+        function selectAnswer(selectedAnswer) {
+            if (selectedAnswer.correct) {
+                feedbackElement.innerText = "Resposta correta!";
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    showQuestion(questions[currentQuestionIndex]);
+                } else {
+                    feedbackElement.innerText = "Parabéns! Você é um verdadeiro urso!";
+                    questionContainer.style.display = "none";
+                }
+            } else {
+                feedbackElement.innerText = "Tente novamente!";
+            }
+        }
+
+        // Inicialização do quiz
+        showQuestion(questions[currentQuestionIndex]);
+    </script>
+</body>
+</html>
+
